@@ -58,6 +58,10 @@ Our implementation is based on the PG-Video-LLaVA model, chosen for its superior
    - JSON Parsing: Extracts structured outputs from LLM responses.
 4. **Output**: JSON parsing results are compiled into a CSV file.
 
+## 🖼️ High-Level Design
+![prop_arch](https://github.com/manishkumart/Super-Rapid-Annotator-Multimodal-Annotation-Tool/assets/37763863/c34d8b34-4c77-4803-b0c4-c35823643e20)
+
+
 ## ⏱️ Performance
 
 - Initial Model Load: 3 seconds
