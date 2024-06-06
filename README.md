@@ -74,18 +74,8 @@ Our implementation is based on the PG-Video-LLaVA model, chosen for its superior
 
 Total annotation time for 50 videos (~5 seconds each) is approximately 5.05 minutes using an RTX 3090 Ti.
 
-## 🗓️ Timeline
 
-| Month  | Task                          |
-|--------|-------------------------------|
-| May    | Model Replication             |
-| June   | Interface Integration         |
-| July   | Development & Enhancement     |
-| August | Testing & Validation          |
 
-## 👨‍💻 About Me
-
-I am **Manish Kumar Thota**, currently pursuing a Master’s in Artificial Intelligence at Yeshiva University, New York. My expertise spans Computer Vision, Natural Language Processing, Machine Learning, and Multimodal Modeling. I have industry experience in Data Science and Machine Learning Engineering, contributing to projects across healthcare, finance, and technology sectors.
 
 ## 🙏 Acknowledgment
 
@@ -101,4 +91,4 @@ Contributions are welcome! Please feel free to submit a pull request.
 
 ## 📧 Contact
 
-For any questions, please reach out to me at [email@example.com](mailto:email@example.com).
+For any questions, please reach out to me at [manish.thota1999@gmail.com](mailto:manish.thota1999@gmail.com).
