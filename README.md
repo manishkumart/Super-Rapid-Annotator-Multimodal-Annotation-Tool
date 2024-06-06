@@ -74,7 +74,10 @@ Our implementation is based on the PG-Video-LLaVA model, chosen for its superior
 
 Total annotation time for 50 videos (~5 seconds each) is approximately 5.05 minutes using an RTX 3090 Ti.
 
+## 📝 Progress/Blog
 
+- **Blog-0**: [My Journey with Red Hen Labs at GSOC '24](https://medium.com/@manish.thota1999/my-journey-with-red-hen-labs-at-gsoc-24-0ebc7f9f7ba6)
+- **Blog-1**: [Why Google Summer of Code? 2.77% of the Applicants were Accepted into Google Summer of Code 2024](https://medium.com/@manish.thota1999/why-google-summer-of-code-2-77-of-the-applicants-were-accepted-into-google-summer-of-code-2024-ec73a857b0ce)
 
 
 ## 🙏 Acknowledgment
