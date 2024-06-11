@@ -46,33 +46,6 @@ Our main goal is to connect the Multimodal vision language model LLaVA-V1.5-13b 
 4. **Comprehensive Evaluation**:
    - Conduct thorough testing to validate the entire annotation and integration process.
 
-## 📈 Methods and High-Level Design
-
-Our implementation is based on the PG-Video-LLaVA model, chosen for its superior spatio-temporal and entity extraction capabilities. The workflow involves:
-
-1. **Input**: Video and JSON inputs.
-2. **Video Processing**:
-   - Scene Detection: Breaks down videos into frames for entity extraction.
-   - Vision and Language Adapter: Processes video frames for spatial and temporal feature extraction.
-3. **Text Processing**:
-   - JSON Parsing: Extracts structured outputs from LLM responses.
-4. **Output**: JSON parsing results are compiled into a CSV file.
-
-## 🖼️ High-Level Design
-![prop_arch](https://github.com/manishkumart/Super-Rapid-Annotator-Multimodal-Annotation-Tool/assets/37763863/c34d8b34-4c77-4803-b0c4-c35823643e20)
-
-
-## ⏱️ Performance
-
-- Initial Model Load: 3 seconds
-- Grounding & Tracking (5s Video): 1 second
-- Entity Matching: 1 second
-- Multimodal Vision: 1 second
-- LLM Response: 1 second
-- JSON Parsing: 1 second
-- Annotation Saving: 1 second
-
-Total annotation time for 50 videos (~5 seconds each) is approximately 5.05 minutes using an RTX 3090 Ti.
 
 ## 📝 Progress/Blog
 
