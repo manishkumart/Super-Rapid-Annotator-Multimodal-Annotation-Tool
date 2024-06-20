@@ -1,0 +1,11 @@
+Model,Description,Link
+Chat-UniVi,Spatial details necessary for images and the comprehensive temporal relationship required for videos.,https://github.com/PKU-YuanGroup/Chat-UniVi
+VideoGPT-Plus,Integrates image and video encoders.,https://github.com/mbzuai-oryx/VideoGPT-plus
+Video-LLaMA,Instruction-tuned Audio-Visual Language Model for Video Understanding.,https://github.com/DAMO-NLP-SG/Video-LLaMA
+VideoAgent,A Memory-augmented Multimodal Agent for Video Understanding.,https://github.com/YueFan1014/VideoAgent
+LITA,Language Instructed Temporal-Localization Assistant.,https://github.com/NVlabs/LITA
+PLLaVA,Parameter-free LLaVA Extension from Images to Videos for Video Dense Captioning.,https://github.com/magic-research/PLLaVA
+GroundingGPT,Language-Enhanced Multi-modal Grounding Model.,https://github.com/lzw-lzw/GroundingGPT
+Shikra,Unleashing Multimodal LLM's Referential Dialogue Magic.,https://github.com/shikras/shikra
+BuboGPT,Enabling Visual Grounding in Multi-Modal LLMs.,https://github.com/magic-research/bubogpt
+PG-Video-LLaVA,Pixel Grounding in Large Multimodal Video Models.,https://github.com/mbzuai-oryx/Video-LLaVA
