@@ -1,6 +1,8 @@
 
 # 🌟 Super Rapid Annotator 🌟
 
+## Development is in progress 👨🏻‍💻
+
 Welcome to the **Super Rapid Annotator** project! This tool is designed to revolutionize video annotation by leveraging advanced multimodal vision and language models. 🚀
 
 ## 📚 Problem Statement
