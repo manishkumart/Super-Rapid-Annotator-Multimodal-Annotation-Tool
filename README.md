@@ -110,3 +110,29 @@ The woman in the video is standing and holding a microphone. She is standing in 
   "indoors": 0,
   "standing": 1
 }
+
+### 📂 Code References
+# Project Directory Structure
+
+## src
+- **llm_helper.py**: Contains helper functions for working with language models.
+- **main.py**: The main script to run the application.
+- **mini.jpeg**: An image file used within the project.
+- **model_loader.py**: Script for loading models.
+- **video_analysis.py**: Script for analyzing video content.
+
+## 🙏 Acknowledgment
+
+Special thanks to **Raúl Sánchez Sánchez** for his continuous support and guidance throughout this project.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a pull request.
+
+## 📧 Contact
+
+For any questions, please reach out to me at [manish.thota1999@gmail.com](mailto:manish.thota1999@gmail.com).
