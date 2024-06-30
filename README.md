@@ -49,7 +49,7 @@ Our main goal is to connect the best vision language models with an annotation f
    - Conduct thorough testing to validate the entire annotation and integration process.
 
 ## 📖 Blog Posts
-
+- **An Experiment to Unlock Ollama’s Potential in Video Question Answering**: [Read here](https://medium.com/@manish.thota1999/an-experiment-to-unlock-ollamas-potential-video-question-answering-e2b4d1bfb5ba)
 - **Vertical Scaling in Video Annotation with Large Language Models: A Journey with GSoC’24 @ Red Hen Labs**: [Read here](https://medium.com/@manish.thota1999/vertical-scaling-in-video-annotation-with-large-language-models-a-journey-with-gsoc24-a5dc9d6ffc87)
 - **My Journey with Red Hen Labs at GSoC ’24**: [Read here](https://medium.com/@manish.thota1999/my-journey-with-red-hen-labs-at-gsoc-24-0ebc7f9f7ba6)
 - **Why Google Summer Of Code?**: [Read here](https://medium.com/@manish.thota1999/why-google-summer-of-code-2-77-of-the-applicants-were-accepted-into-google-summer-of-code-2024-ec73a857b0ce)
