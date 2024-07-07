@@ -1,0 +1,173 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.upload-section {
+    margin-bottom: 20px;
+}
+
+.custom-file-upload {
+    border: 2px solid #007bff;
+    display: inline-block;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: white;
+    color: #007bff;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.video-container {
+    margin-bottom: 20px;
+    display: none; /* Hide the video container by default */
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.options {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.options h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+    flex: 1;
+    margin-right: 10px;
+}
+
+button:last-child {
+    margin-right: 0;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.output {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: left;
+}
+
+h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+h4 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .custom-file-upload, button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .options h2 {
+        font-size: 1.2em;
+    }
+
+    .checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    label {
+        font-size: 0.9em;
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Rapid Annotator powered by Large Language Models</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Super Rapid Annotator powered by Large Language Models</h1>
+        <div class="upload-section">
+            <label for="video-upload" class="custom-file-upload">Upload Video</label>
+            <input type="file" id="video-upload" accept="video/*">
+        </div>
+        <div class="options">
+            <div class="video-container" id="video-container">
+                <video id="uploaded-video" controls></video>
+            </div>
+            <h2>Annotation Options</h2>
+            <div class="checkboxes">
+                <label>
+                    <input type="checkbox" id="standing-sitting"> Standing/Sitting
+                </label>
+                <label>
+                    <input type="checkbox" id="hands-free"> Hands free or not
+                </label>
+                <label>
+                    <input type="checkbox" id="screen-interactions"> Screen Interactions or not
+                </label>
+                <label>
+                    <input type="checkbox" id="indoor-outdoor"> Indoor/Outdoor
+                </label>
+            </div>
+            <div class="buttons">
+                <button id="options-btn">Options</button>
+                <button id="prompt-btn">Prompt</button>
+                <button id="video-annotate-btn">Video Annotate</button>
+                <button id="output-btn">Output</button>
+            </div>
+            <div id="combined-output" class="output">
+                <!-- Combined output will be displayed here -->
+            </div>
+        </div>
+        <div id="annotation-output" class="output">
+            <!-- Annotation output will be displayed here -->
+        </div>
+        <div id="video-annotation-output" class="output">
+            <!-- Video annotation output will be displayed here -->
+        </div>
+        <div id="final-output" class="output">
+            <!-- Final output will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

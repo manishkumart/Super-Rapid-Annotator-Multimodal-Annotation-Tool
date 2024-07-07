@@ -1,0 +1,9 @@
+torch
+git+https://github.com/huggingface/transformers.git
+pillow
+accelerate
+decord
+timm
+sentencepiece
+gradio
+protobuf
