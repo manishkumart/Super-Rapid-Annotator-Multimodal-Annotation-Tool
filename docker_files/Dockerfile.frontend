@@ -1,0 +1,17 @@
+# Use an official Node.js runtime as a parent image
+FROM node:16
+
+# Set the working directory
+WORKDIR /Super-Rapid-Annotator-Multimodal-Annotation-Tool
+
+# Copy the frontend files
+COPY src/ .
+
+# Install http-server
+RUN npm install -g http-server
+
+# Expose the port
+EXPOSE 5500
+
+# Command to run the http-server
+CMD ["http-server", ".", "-p", "5500"]
