@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://sites.google.com/case.edu/techne-public-site/red-hen-rapid-annotator">
-    <img src="https://user-images.githubusercontent.com/39674365/129477873-8c9b2191-8261-4ef9-a67f-94e5b57169bd.png" alt="Logo", width="300" height="300" >
+    <img src="https://user-images.githubusercontent.com/39674365/129477873-8c9b2191-8261-4ef9-a67f-94e5b57169bd.png" alt="Logo", width="250" height="250" >
   </a>
   <h1 align="center"> 🌟 Super Rapid Annotator 🌟</h1>
   <p align="center">
