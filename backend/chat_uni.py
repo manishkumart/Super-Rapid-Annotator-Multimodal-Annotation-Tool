@@ -62,8 +62,7 @@ def _get_rawvideo_dec(video_path, image_processor, max_frames=MAX_IMAGE_LENGTH, 
     else:
         print("video path: {} error.")
 
-@app.on_event("startup")
-async def load_model():
+async def load_model(model_path):
     global model, tokenizer, image_processor, loading_progress
 
     # Check if the model has already been loaded
@@ -72,8 +71,6 @@ async def load_model():
 
     disable_torch_init()
 
-    # Get the model path from environment variables
-    model_path = os.getenv('MODEL_PATH', '/home/manish/Chat-UniVi/model/Chat-UniVi')
     model_name = "ChatUniVi"
 
     loading_progress = 10
@@ -98,6 +95,10 @@ async def load_model():
         vision_tower.load_model()
     image_processor = vision_tower.image_processor
     loading_progress = 100
+
+@app.on_event("startup")
+async def startup_event():
+    await load_model(model_path)
 
 @app.post("/process")
 async def process_video(question: str = Form(...), video: UploadFile = File(...)):
@@ -178,10 +179,10 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Run the FastAPI app with specified model path and port.")
     parser.add_argument('--model_path', type=str, required=True, help='Path to the model directory')
-    parser.add_argument('--port', type=int, default=8100, help='Port number to run the FastAPI app')
 
     args = parser.parse_args()
 
     model_path = args.model_path
+    print(model_path)
 
-    uvicorn.run(app, host="0.0.0.0", port=args.port)
+    uvicorn.run(app, host="0.0.0.0", port=8100)
