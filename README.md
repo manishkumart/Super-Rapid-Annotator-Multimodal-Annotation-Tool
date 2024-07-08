@@ -70,7 +70,7 @@ python models/download_models.py --m1 ./models/ChatUniVi --m2 ./models/Phi3
 
 Head over to `chat_uni.py` and update the model path at line `77`, and in `struct_phi3.py` at line `90`.
 
-## Backend Servers
+### Backend Servers
 You need three terminals for this. Run each of the following commands in three different terminals with the full path specified:
 
 ```bash
@@ -101,7 +101,7 @@ cd backend
 
     **This proxy server will run on port** `8080`.
 
-## Frontend Server
+### Frontend Server
 Open a new terminal and paste the below command 
 
 ```bash
