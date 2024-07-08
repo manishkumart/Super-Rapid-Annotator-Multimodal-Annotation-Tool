@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, Form, WebSocket, WebSocketDisconnect
+from fastapi.responses import HTMLResponse
 import torch
 import os
 from ChatUniVi.constants import *
@@ -10,9 +11,10 @@ from PIL import Image
 from decord import VideoReader, cpu
 import numpy as np
 import asyncio
-import argparse
+import sys
 
 app = FastAPI()
+
 
 # Global variables to store the model components
 model = None
@@ -62,7 +64,8 @@ def _get_rawvideo_dec(video_path, image_processor, max_frames=MAX_IMAGE_LENGTH, 
     else:
         print("video path: {} error.")
 
-async def load_model(model_path):
+@app.on_event("startup")
+async def load_model():
     global model, tokenizer, image_processor, loading_progress
 
     # Check if the model has already been loaded
@@ -71,6 +74,9 @@ async def load_model(model_path):
 
     disable_torch_init()
 
+    # Get the model path from environment variables
+    model_path = "/home/manish/Super-Rapid-Annotator-Multimodal-Annotation-Tool/models/ChatUniVi"
+    # model_path = os.getenv('MODEL_PATH', '/home/manish/Chat-UniVi/model/Chat-UniVi')
     model_name = "ChatUniVi"
 
     loading_progress = 10
@@ -95,10 +101,6 @@ async def load_model(model_path):
         vision_tower.load_model()
     image_processor = vision_tower.image_processor
     loading_progress = 100
-
-@app.on_event("startup")
-async def startup_event():
-    await load_model(model_path)
 
 @app.post("/process")
 async def process_video(question: str = Form(...), video: UploadFile = File(...)):
@@ -173,16 +175,127 @@ async def websocket_endpoint(websocket: WebSocket):
     finally:
         await websocket.close()
 
+### HTML Page
+
+@app.get("/", response_class=HTMLResponse)
+async def get():
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Video Question Answering</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 40px;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+            .form-group input[type="text"] {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+            .form-group input[type="file"] {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+            .form-group button {
+                padding: 10px 15px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+            }
+            .form-group button:hover {
+                background-color: #0056b3;
+            }
+            .result {
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                background-color: #f9f9f9;
+            }
+            .progress {
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                background-color: #f9f9f9;
+            }
+            #progress-bar {
+                width: 0;
+                height: 20px;
+                background-color: #4caf50;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Video Question Answering</h1>
+            <div class="progress">
+                <div id="progress-bar"></div>
+            </div>
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <input type="text" id="question" name="question">
+            </div>
+            <div class="form-group">
+                <label for="video">Upload Video:</label>
+                <input type="file" id="video" name="video">
+            </div>
+            <div class="form-group">
+                <button onclick="submitForm()">Submit</button>
+            </div>
+            <div class="result" id="result"></div>
+        </div>
+        <script>
+            const progressBar = document.getElementById('progress-bar');
+
+            const ws = new WebSocket(`ws://${window.location.host}/ws`);
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                if (data.progress) {
+                    progressBar.style.width = data.progress + '%';
+                    if (data.progress == 100) {
+                        ws.close();
+                    }
+                }
+                if (data.status) {
+                    progressBar.innerText = data.status;
+                }
+            };
+
+            async function submitForm() {
+                const question = document.getElementById('question').value;
+                const video = document.getElementById('video').files[0];
+
+                const formData = new FormData();
+                formData.append('question', question);
+                formData.append('video', video);
+
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                document.getElementById('result').innerText = result.answer || result.error;
+            }
+        </script>
+    </body>
+    </html>
+    """
+
 if __name__ == "__main__":
     import uvicorn
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Run the FastAPI app with specified model path and port.")
-    parser.add_argument('--model_path', type=str, required=True, help='Path to the model directory')
-
-    args = parser.parse_args()
-
-    model_path = args.model_path
-    print(model_path)
-
     uvicorn.run(app, host="0.0.0.0", port=8100)
