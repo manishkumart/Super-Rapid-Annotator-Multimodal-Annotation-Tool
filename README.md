@@ -1,52 +1,132 @@
-# 🌟 Super Rapid Annotator 🌟
 
-## Development is in progress 👨🏻‍💻
+<p align="center">
+  <a href="https://sites.google.com/case.edu/techne-public-site/red-hen-rapid-annotator">
+    <img src="https://user-images.githubusercontent.com/39674365/129477873-8c9b2191-8261-4ef9-a67f-94e5b57169bd.png" alt="Logo", width="300" height="300" >
+  </a>
+  <h1 align="center"> 🌟 Super Rapid Annotator 🌟</h1>
+  <p align="center">
+    Red Hen Lab's Super Rapid Annotator Powered By Large Language Models
+    <br />
+    <br />
+  </p>
+</p>
 
-Welcome to the **Super Rapid Annotator** project! This tool is designed to revolutionize video annotation by leveraging advanced multimodal vision and language models. 🚀
+
+Welcome to the **Super Rapid Annotator** project! This tool is designed for video annotation by leveraging advanced multimodal vision and language models. 🚀
 
 ## 📚 Problem Statement
 
 Annotating videos, especially identifying specific entities and their temporal relationships, is a complex and time-consuming task. Traditional methods lack efficiency and accuracy, particularly in handling multiple videos simultaneously. Our Super Rapid Annotator addresses these challenges by integrating state-of-the-art multimodal models with sophisticated spatial-temporal analysis, streamlining the annotation process.
 
-## 🌟 Features
-
-- **Automatic Video Annotation**: Uses the best vision language models for rapid and accurate annotation.
-- **Multimodal Capabilities**: Combines vision and language models to enhance understanding and entity detection.
-- **User-Friendly Interface**: Accessible through a Gradio application on Hugging Face.
-- **Concurrent Processing**: Efficiently processes multiple videos at once.
-- **CSV Output**: Annotations are compiled into a user-friendly CSV format.
 
 ## 🛠️ Tech Stack
 
-- **Python** 🐍
-- **PyTorch** 🔥
-- **Hugging Face** 🤗
-- **Gradio** 🎨
-- **Pydantic** 🧩
-- **CUDA** ⚙️
-- **OpenCV** 📸
-- **FFmpeg** 🎞️
-- **FastAPI** 🚀
+![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=PyTorch&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FECC00?style=for-the-badge&logo=hugging-face&logoColor=white)
+![Gradio](https://img.shields.io/badge/Gradio-3D4AA6?style=for-the-badge&logo=gradio&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-2960D3?style=for-the-badge&logo=pydantic&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=OpenCV&logoColor=white)
+![FFmpeg](https://img.shields.io/badge/FFmpeg-007808?style=for-the-badge&logo=ffmpeg&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
-## 🎯 Goal and Objectives
+## Prerequisites
+![GPU](https://img.shields.io/badge/GPU-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+![Storage](https://img.shields.io/badge/Storage-Min20GB-blue?style=for-the-badge)
 
-Our main goal is to connect the best vision language models with an annotation framework. The specific objectives include:
 
-1. **Model Replication and Interface Integration**:
-   - Replicate the best vision language models.
-   - Integrate the models within a Gradio interface on Hugging Face.
+## Setup
 
-2. **Development and Enhancement of Processing Capabilities**:
-   - Develop a class to structure LLM responses into formatted JSON.
-   - Enable the processing of multiple videos in Gradio.
-   - Implement the Instructor class to parse JSON structures from LLM responses.
+### Clone the Repository
 
-3. **Testing and Validation**:
-   - Perform initial tests with the JSON parser.
-   - Ensure accurate capture and storage of annotations within a data frame.
+First, clone the repository and navigate into the project directory:
 
-4. **Comprehensive Evaluation**:
-   - Conduct thorough testing to validate the entire annotation and integration process.
+```bash
+git clone https://github.com/manishkumart/Super-Rapid-Annotator-Multimodal-Annotation-Tool.git
+cd Super-Rapid-Annotator-Multimodal-Annotation-Tool
+```
+
+### Create Virtual Environment
+
+Create a virtual environment and install the required packages:
+
+```bash
+conda create -n env python=3.10 -y
+conda activate env
+pip install -r requirements.txt
+npm i cors-anywhere
+```
+
+### Model Downloads
+
+Download the necessary models using the below command:
+
+```bash
+python models/download_models.py --m1 ./models/ChatUniVi --m2 ./models/Phi3
+```
+
+## Backend Servers
+You need three terminals for this. Run each of the following commands in three different terminals with the full path specified:
+
+1. Start the `chat_uni` server responsible for video annotation.
+
+    ```bash
+    python backend/chat_uni.py --model_path <full_path>
+    ```
+
+    **This server will run on port** `8100`.
+
+2. Start the `struct_phi3` server:
+
+    ```bash
+    python backend/struct_phi3.py --model_path <full_path>
+    ```
+
+    **This server will run on port** `8200`.
+
+3. Start the Node.js server:
+
+    ```bash
+    npm install backend/server.js
+    ```
+
+    **This server will run on port** `8080`.
+
+## Frontend Server
+Open a new terminal and paste the below command 
+
+```bash
+python frontend/serve_html.py
+```
+
+**The frontend server can be accessed at [http://localhost:5500](http://localhost:5500).**
+
+## Steps to Follow through the UI:
+
+![40BB8366-D842-4840-8E71-E796AFE2A9C8](https://github.com/manishkumart/Super-Rapid-Annotator-Multimodal-Annotation-Tool/assets/37763863/62337212-e9d6-4a8b-b361-64c697978af3)
+
+1. **Upload a Video**
+   - Click on the **"Upload Video"** button to select and upload your video file.
+
+2. **Select Annotation Options**
+   - Choose any combination of the available annotation options:
+     - Standing/Sitting
+     - Screen Interactions or not
+     - Hands free or not
+     - Indoor/Outdoor
+
+3. **Start the Annotation Process**
+   - Click the **"Start"** button. This will display the selected options and the name of the uploaded video.
+
+4. **Annotate the Video**
+   - Click the **"Video Annotate"** button. This will use the prompt and the uploaded video to generate annotations.
+
+5. **View the Prompt**
+   - Click on the **"Prompt"** button to see the prompt used in the background based on the selected options.
+
+6. **Get the Output**
+   - Click the **"Output"** button to receive the structured output of the annotations.
 
 ## 📖 Blog Posts
 - **An Experiment to Unlock Ollama’s Potential in Video Question Answering**: [Read here](https://medium.com/@manish.thota1999/an-experiment-to-unlock-ollamas-potential-video-question-answering-e2b4d1bfb5ba)
@@ -54,6 +134,13 @@ Our main goal is to connect the best vision language models with an annotation f
 - **My Journey with Red Hen Labs at GSoC ’24**: [Read here](https://medium.com/@manish.thota1999/my-journey-with-red-hen-labs-at-gsoc-24-0ebc7f9f7ba6)
 - **Why Google Summer Of Code?**: [Read here](https://medium.com/@manish.thota1999/why-google-summer-of-code-2-77-of-the-applicants-were-accepted-into-google-summer-of-code-2024-ec73a857b0ce)
 
+
+## 🌟 Features
+
+- [x] **Automatic Video Annotation**: Uses the best vision language models for rapid and accurate annotation.
+- [x] **Multimodal Capabilities**: Combines vision and language models to enhance understanding and entity detection.
+- [ ] **Concurrent Processing**: Efficiently processes multiple videos at once.
+- [ ] **CSV Output**: Annotations are compiled into a user-friendly CSV format.
 
 ## 📑 Findings and Insights
 
@@ -87,39 +174,6 @@ For each question, analyze the given video carefully and base your answers on th
 
 By taking these factors into account when watching the video, please answer the questions accurately.
 
-### Selecting the Best Model During the Coding Period (Research is Key)
-During the coding period, extensive research was conducted to identify the best model for video processing. Among the latest research, the best model turned out to be Chat-UniVi. Kudos to the team behind it. The processing and description of the video using Chat-UniVi is by far the best.
-
-Below is a comparison table of the various models we researched. This table includes a brief description and a link to each model’s repository for further exploration.
-
-### Outstanding Features of Chat-UniVi
-Chat-UniVi excels in processing and describing video content by capturing the spatial details necessary for images and the comprehensive temporal relationships required for videos. This model’s ability to handle both aspects makes it a standout choice for video processing tasks.
-
-### Sample Input Video
-
-#### Chat-UniVi Generated Output — Step 1
-
-The woman in the video is standing and holding a microphone. She is standing in front of a bus and a news reporting set. The woman is not interacting with any visible screens, and there are no signs of greenery or people passing by in the background. Therefore, the setting is an Outdoor environment.
-
-#### Structured Pydantic Output — Step 2
-
-```json
-{
-  "screen_interaction_yes": 0,
-  "hands_free": 0,
-  "indoors": 0,
-  "standing": 1
-}
-
-### 📂 Code References
-# Project Directory Structure
-
-## src
-- **llm_helper.py**: Contains helper functions for working with language models.
-- **main.py**: The main script to run the application.
-- **mini.jpeg**: An image file used within the project.
-- **model_loader.py**: Script for loading models.
-- **video_analysis.py**: Script for analyzing video content.
 
 ## 🙏 Acknowledgment
 
@@ -133,6 +187,12 @@ This project is licensed under the MIT License.
 
 Contributions are welcome! Please feel free to submit a pull request.
 
-## 📧 Contact
+## 🌎 Connect with me
 
-For any questions, please reach out to me at [manish.thota1999@gmail.com](mailto:manish.thota1999@gmail.com).
+
+For any questions, please reach out to me at LinkedIn
+
+<div align="center">
+<a href="https://www.linkedin.com/in/manishkumarthota/" target="_blank">
+<img src=https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt=linkedin style="margin-bottom: 5px;" />
+   
