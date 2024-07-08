@@ -5,7 +5,6 @@ import json
 import warnings
 from fastapi import FastAPI
 from typing import Dict
-import argparse
 
 # Ignore warnings
 warnings.filterwarnings(action='ignore')
@@ -87,17 +86,6 @@ class VideoAnalysis(BaseModel):
             standing=logic_dict.get("Standing", 0)
         )
 
-# Parse command-line arguments
-parser = argparse.ArgumentParser(description="Run the FastAPI app with specified model path and port.")
-parser.add_argument('--model_path', type=str, required=True, help='Path to the model directory')
-parser.add_argument('--port', type=int, default=8200, help='Port number to run the FastAPI app')
-
-args = parser.parse_args()
-
-# Load the model and pipeline
-pipe = ModelLoader.load_model(args.model_path)
-llm_helper = LLMHelper(pipe)
-
 # Initialize FastAPI
 SLLM_Output_app = FastAPI()
 
@@ -117,7 +105,16 @@ def process_llm_output(input: LLMInput) -> Dict:
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(SLLM_Output_app, host="0.0.0.0", port=args.port)
+    import argparse
 
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Run the FastAPI app with specified model path and port.")
+    parser.add_argument('--model_path', type=str, required=True, help='Path to the model directory')
 
+    args = parser.parse_args()
 
+    # Load the model and pipeline
+    pipe = ModelLoader.load_model(args.model_path)
+    llm_helper = LLMHelper(pipe)
+
+    uvicorn.run(SLLM_Output_app, host="0.0.0.0", port=8200)
