@@ -74,9 +74,7 @@ async def load_model():
 
     disable_torch_init()
 
-    # Get the model path from environment variables
-    model_path = "/home/manish/Super-Rapid-Annotator-Multimodal-Annotation-Tool/models/ChatUniVi"
-    # model_path = os.getenv('MODEL_PATH', '/home/manish/Chat-UniVi/model/Chat-UniVi')
+    model_path = "model_path"
     model_name = "ChatUniVi"
 
     loading_progress = 10
