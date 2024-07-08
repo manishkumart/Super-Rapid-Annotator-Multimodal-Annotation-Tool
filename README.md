@@ -66,32 +66,40 @@ Download the necessary models using the below command:
 python models/download_models.py --m1 ./models/ChatUniVi --m2 ./models/Phi3
 ```
 
+### Update Model paths
+
+Head over to `chat_uni.py` and update the model path at line `77`, and in `struct_phi3.py` at line `90`.
+
 ## Backend Servers
 You need three terminals for this. Run each of the following commands in three different terminals with the full path specified:
+
+```bash
+cd backend
+```
 
 1. Start the `chat_uni` server responsible for video annotation.
 
     ```bash
-    python backend/chat_uni.py --model_path <full_path>
+    uvicorn chat_uni:app --reload --port 8001
     ```
 
-    **This server will run on port** `8100`.
+    **This server will run on port `8001`. If the port is busy, you can try another port, and then update the port in script.js under src.**
 
 2. Start the `struct_phi3` server:
 
     ```bash
-    python backend/struct_phi3.py --model_path <full_path>
+     uvicorn struct_phi3:app --reload --port 8002
     ```
 
-    **This server will run on port** `8200`.
+   **This server will run on port `8002`. If the port is busy, you can try another port, and then update the port in script.js under src.**
 
 3. Start the Node.js server:
 
     ```bash
-    npm install backend/server.js
+    node backend/server.js
     ```
 
-    **This server will run on port** `8080`.
+    **This proxy server will run on port** `8080`.
 
 ## Frontend Server
 Open a new terminal and paste the below command 
