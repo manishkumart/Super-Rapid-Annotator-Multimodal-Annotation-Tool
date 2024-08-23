@@ -35,8 +35,106 @@ Annotating videos, especially identifying specific entities and their temporal r
 ![GPU](https://img.shields.io/badge/GPU-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
 ![Storage](https://img.shields.io/badge/Storage-Min20GB-blue?style=for-the-badge)
 
+## Updated Setup - 20 Aug 2024
 
-## Setup
+We have updated the model to **MiniCPM-V 2.6** which is a multimodal large language model (MLLM) designed for vision-language understanding. This model accepts images, videos, and text as inputs and generates high-quality text outputs. Since February 2024, five versions of the model have been released, focusing on **strong performance and efficient deployment**.
+
+**Model:** [MiniCPM-V 2.6 🤗](https://huggingface.co/openbmb/MiniCPM-V-2_6) | [Demo 🤖](https://huggingface.co/spaces/openbmb/MiniCPM-V-2_6)
+
+Currently, the model and its dependencies are hosted on Gradio Hugging Face.
+
+**Gradio App:** [GSOC Super Rapid Annotator 🤗](https://huggingface.co/spaces/ManishThota/GSoC-Super-Rapid-Annotator)
+
+![Model Image](https://github.com/user-attachments/assets/449b3781-868b-42aa-b61a-92c57efbc8c7)
+
+## Updated Project Structure
+
+The project has been structured as follows:
+
+- **src**
+  - `utils.py`
+  - `video_model.py`
+- **data**
+  - `videos`
+  - `train.csv`
+- `multi_video_app.py` - Batch video processing
+- `app.py` - Single video processing
+- `requirements.txt`
+- `README.md`
+## Project Evolution
+
+### Initial Approach
+
+Initially, the approach was to combine a vision-language large language model (VLLM) to process videos and a smaller LLM like Phi to structure the outputs. This method worked well for processing a single video. However, when processing multiple videos in batches, having two LLMs in the pipeline introduced excessive context, making the LLM prone to hallucinations.
+
+### Refined Approach
+
+To address this, the constraints of using two LLMs were removed, focusing solely on using the VLLM for both video processing and output structuring. The key challenges faced during this refinement are outlined below.
+
+### Batch Video Processing Challenges
+
+1. **Video Length and Frame Extraction**: Each video was 4 seconds long. Processing 300 videos amounted to 1200 seconds (20 minutes) of video, with each video containing an average of 80 frames. To efficiently process this, we extracted 15-20 random frames from the beginning to the end of the video. These frames were stitched together into a single image, making it easier to understand the video's nuances.
+
+    [Example Video](https://github.com/user-attachments/assets/30f3537e-3608-4de1-9c44-c8ee90a22ac2)
+
+    The above video can be translated into 16 frames stitched into a grid format:
+
+    ![Stitched Frames](https://github.com/user-attachments/assets/cf4c6ca8-0e14-4eec-98a0-d00703f8576a)
+
+    While this approach worked for some videos, it did not capture all the details. Since limiting the frames to just 16 didn't yield appropriate results, the focus shifted to processing the videos as they are. After each video, the GPU was freed up for batch processing, solving the batch processing issue. The next challenge was structuring the outputs.
+
+
+### Structuring the Outputs
+
+Previously, we used a Pydantic class to process outputs with another LLM in the pipeline. With the removal of the second LLM, the functionality could still be retained, but research showed that using HTML tags was a more efficient approach. With minimal prompting, it became easier to pass content within HTML tags. For example:
+
+```bash
+Prompt: Provide the results in <annotation> tags, where 0 indicates False, 1 indicates True, and None indicates that no information is present. Follow the examples below:
+        <annotation>indoors: 0</annotation>
+        <annotation>standing: 1</annotation>
+        <annotation>hands.free: 0</annotation>
+        <annotation>screen.interaction_yes: 0</annotation>
+```
+
+Parsing the responses from these tags was simplified using the following Python function:
+
+```python
+def parse_string(string, tags):
+    """
+    Extracts the content between the specified HTML tags from the given string.
+    Args:
+        string (str): The input string to search for the tag content.
+        tags (list): A list of HTML tags to search for.
+    Returns:
+        dict: A dictionary with tags as keys and lists of content as values.
+    Example:
+        >>> parse_string("<code>Hello, World!</code><note>Important</note>", ["code", "note"])
+        {'code': ['Hello, World!'], 'note': ['Important']}
+    """
+    results = {}
+    
+    for tag in tags:
+        pattern = rf"<{tag}>(.*?)</{tag}>"
+        matches = re.findall(pattern, string, re.DOTALL)
+        results[tag] = matches if matches else None
+
+    return results
+```
+
+With this update, all the required fields were successfully extracted and processed into a dataframe.
+
+## Evaluation on the Training Dataset
+
+Evaluating the accuracy of each annotation using the best-performing model revealed that LLMs are proficient at understanding body posture (standing/sitting) and location (indoors/outdoors) annotations. However, they often fail to validate the other two annotations, as depicted in the table below.
+
+![Evaluation Table](https://github.com/user-attachments/assets/9e4f7f7f-c6aa-4c62-bd4e-04b1c978d21e)
+
+## Future Improvements
+
+For improved multimodal modeling, you can tweak the model by attaching the Hugging Face repository name in the `video_model.py` file and testing the annotations.
+
+
+## Preliminary Setup
 
 ### Clone the Repository
 
@@ -147,8 +245,8 @@ python frontend/serve_html.py
 
 - [x] **Automatic Video Annotation**: Uses the best vision language models for rapid and accurate annotation.
 - [x] **Multimodal Capabilities**: Combines vision and language models to enhance understanding and entity detection.
-- [ ] **Concurrent Processing**: Efficiently processes multiple videos at once.
-- [ ] **CSV Output**: Annotations are compiled into a user-friendly CSV format.
+- [x] **Concurrent Processing**: Efficiently processes multiple videos at once.
+- [x] **CSV Output**: Annotations are compiled into a user-friendly CSV format.
 
 ## 📑 Findings and Insights
 
@@ -185,7 +283,9 @@ By taking these factors into account when watching the video, please answer the 
 
 ## 🙏 Acknowledgment
 
-Special thanks to **Raúl Sánchez Sánchez** for his continuous support and guidance throughout this project.
+- Special thanks to **Raúl Sánchez Sánchez** for his continuous support and guidance throughout this project.
+
+- **OpenBMB and team:** [OpenBMB](https://huggingface.co/openbmb)
 
 ## 📄 License
 
