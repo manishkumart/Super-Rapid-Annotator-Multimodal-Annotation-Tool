@@ -47,6 +47,26 @@ Currently, the model and its dependencies are hosted on Gradio Hugging Face.
 
 ![Model Image](https://github.com/user-attachments/assets/449b3781-868b-42aa-b61a-92c57efbc8c7)
 
+### Clone the Repository
+
+First, clone the repository and navigate into the project directory:
+
+```bash
+git clone https://github.com/manishkumart/Super-Rapid-Annotator-Multimodal-Annotation-Tool.git
+cd Super-Rapid-Annotator-Multimodal-Annotation-Tool/gradio
+```
+
+### Create Virtual Environment
+
+Create a virtual environment and install the required packages:
+
+```bash
+conda create -n env python=3.10 -y
+conda activate env
+pip install -r requirements.txt
+```
+If you watch to cache the model, you can download it by following the below from "Preliminary Setup" steps by changing the location and the model name.
+
 ## Updated Project Structure
 
 The project has been structured as follows:
