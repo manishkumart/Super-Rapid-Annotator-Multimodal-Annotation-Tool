@@ -35,7 +35,7 @@ Annotating videos, especially identifying specific entities and their temporal r
 ![GPU](https://img.shields.io/badge/GPU-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
 ![Storage](https://img.shields.io/badge/Storage-Min20GB-blue?style=for-the-badge)
 
-## Updated Setup - 20 Aug 2024
+## Updated Setup 2.0 - 20 Aug 2024
 
 We have updated the model to **MiniCPM-V 2.6** which is a multimodal large language model (MLLM) designed for vision-language understanding. This model accepts images, videos, and text as inputs and generates high-quality text outputs. Since February 2024, five versions of the model have been released, focusing on **strong performance and efficient deployment**.
 
@@ -154,7 +154,7 @@ Evaluating the accuracy of each annotation using the best-performing model revea
 For improved multimodal modeling, you can tweak the model by attaching the Hugging Face repository name in the `video_model.py` file and testing the annotations.
 
 
-## Preliminary Setup
+## Preliminary 1.0 Setup
 
 ### Clone the Repository
 
