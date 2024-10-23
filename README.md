@@ -12,6 +12,12 @@
 </p>
 
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c54c0d0a-9f04-4a09-ad22-c709768da724" width="300">
+</p>
+
+
+
 Welcome to the **Super Rapid Annotator** project! This tool is designed for video annotation by leveraging advanced multimodal vision and language models. 🚀
 
 ## 📚 Problem Statement
